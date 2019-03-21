@@ -27,9 +27,9 @@ begin;-- Procedure engagement.
 
 	if (@Text is not null)
 		begin;
-		set @prvStatus = (select [Text] from SES.tStatement where StatementId = @StatementId);
-		update SES.tStatement set [Text] = @Text where StatementId = @StatementId;
-		set @newStatus = (select [Text] from SES.tStatement where StatementId = @StatementId);
+			set @prvStatus = (select [Text] from SES.tStatement where StatementId = @StatementId);
+			update SES.tStatement set [Text] = @Text where StatementId = @StatementId;
+			set @newStatus = (select [Text] from SES.tStatement where StatementId = @StatementId);
 		end;
 
 	if (
