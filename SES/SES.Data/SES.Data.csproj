@@ -8,6 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\**\*.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\**\*.tql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CK.DB.Auth" Version="$(CKDBVersion)" />
     <PackageReference Include="HW.Subsuite.Essentials.Culture" Version="0.1.4" />
   </ItemGroup>
