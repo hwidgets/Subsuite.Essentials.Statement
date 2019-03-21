@@ -11,7 +11,7 @@ namespace SES.Data
     Versions("1.0.0")]
     public abstract class Package : SqlPackage
     {
-        void StObjConstruct()
+        void StObjConstruct(SEC.Data.Package cPckg)
         {
         }
     }
