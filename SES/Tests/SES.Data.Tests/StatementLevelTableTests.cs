@@ -75,6 +75,27 @@ namespace SES.Data.Tests
             }
         }
 
+        [Test]
+        public async Task DeleteStatementLevel_whenAlreadyExistingStatementLevel_shouldNotThrowException_and_shouldDeleteForesaidStatementLevel()
+        {
+            using (var ctx = new SqlStandardCallContext())
+            {
+                var sLTable = CK.Core.StObjModelExtension.Obtain<StatementLevelTable>(TestHelper.StObjMap.StObjs);
+
+                // #1. Creates the Statement Level object and then inserts it in database.
+                var sLId = await sLTable.CreateStatementLevelAsync(ctx, systemId, (Level) await GenerateAvailableStatementLevelCode(ctx, sLTable));
+
+                // #2. Deleting the foresaid Statement Level object should not present issues.
+                Func<Task> act = async () => await sLTable.DeleteStatementLevelAsync(ctx, systemId, sLId);
+                act.Should().NotThrow<SqlDetailedException>();
+
+                // #3. Asserts that deletion process has been successful.
+                var stdObj = await ctx[sLTable].Connection.QueryFirstOrDefaultAsync<StdStatementLevelInfo>
+                    ("select * from SES.tStatementLevel where StatementLevelId = @id;", new { id = sLId });
+                Assert.That(stdObj, Is.Null);
+            }
+        }
+
         private async Task<int> GenerateAvailableStatementLevelCode(ISqlCallContext ctx, StatementLevelTable sLTable, int tried = 0)
         {
             var random = new Random();
