@@ -61,9 +61,9 @@ namespace SES.Data.Tests
                 var sTable = CK.Core.StObjModelExtension.Obtain<StatementTable>(TestHelper.StObjMap.StObjs);
 
                 // #1. Creates the Statement object that is next going to be inserted in database.
-                var sId = await sTable.CreateStatementAsync(ctx, systemId, Level.Warning, 0, 0, string.Empty);
+                var sId = await sTable.CreateStatementAsync(ctx, systemId, Level.Info, 0, 0, string.Empty);
 
-                // #2. Deleting the foresaid Statement Level object should not present issues.
+                // #2. Deleting the foresaid Statement object should not present issues.
                 Func<Task> act = async () => await sTable.DeleteStatementAsync(ctx, systemId, sId);
                 act.Should().NotThrow<SqlDetailedException>();
 
@@ -72,6 +72,29 @@ namespace SES.Data.Tests
                     ("select * from SES.tStatement where StatementId = @id;", new { id = sId });
                 Assert.That(stdObj, Is.Null);
 
+            }
+        }
+
+        [Test]
+        public async Task UpdateStatement_withChangedData_shouldNotThrowException_and_shouldUpdateForesaidStatement()
+        {
+            using (var ctx = new SqlStandardCallContext())
+            {
+                var sTable = CK.Core.StObjModelExtension.Obtain<StatementTable>(TestHelper.StObjMap.StObjs);
+
+                // #1. Creates the Statement object that is next going to be inserted in database.
+                var sId = await sTable.CreateStatementAsync(ctx, systemId, Level.Info, 0, 0, string.Empty);
+
+                // #2. Updating the foresaid Statement object should not present issues.
+                var newStatus = 312; var newText = "TEST";
+                Func<Task> act = async () => await sTable.UpdateStatementAsync(ctx, systemId, sId, newText, 312);
+                act.Should().NotThrow<SqlDetailedException>();
+
+                // #3. Asserts that update process has been successful.
+                var stObj = await ctx[sTable].Connection.QueryFirstOrDefaultAsync<StdStatementInfo>
+                    ("select * from SES.tStatement where StatementId = @id;", new { id = sId });
+                Assert.That(stObj.Text, Is.EqualTo(newText));
+                Assert.That(stObj.Status, Is.EqualTo(newStatus));
             }
         }
     }
