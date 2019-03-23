@@ -68,8 +68,8 @@ namespace SES.Data
             ISqlCallContext ctx,
             int actorId,
             int statementId,
-            int? status,
-            string text
+            string text,
+            int? status
         );
     }
 }
