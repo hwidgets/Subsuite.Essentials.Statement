@@ -13,17 +13,20 @@ as
 begin;-- Procedure engagement.
 	declare @stillExisting int;
 
-	delete from SES.tStatement where StatementId = @StatementId;
-	set @stillExisting = 
-		(
-			select
-				StatementId 
-			from
-				SES.tStatement
-			where
-				StatementId = @StatementId
-		);
+	if (@StatementId != 0)
+		begin;
+			delete from SES.tStatement where StatementId = @StatementId;
+			set @stillExisting = 
+				(
+					select
+						StatementId 
+					from
+						SES.tStatement
+					where
+						StatementId = @StatementId
+				);
 
-	if (@stillExisting is null)
-		set @DeletionResult = 1;
+			if (@stillExisting is null)
+				set @DeletionResult = 1;
+		end;
 end;
