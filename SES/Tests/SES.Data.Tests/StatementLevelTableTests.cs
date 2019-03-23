@@ -14,15 +14,15 @@ namespace SES.Data.Tests
     {
         private const int systemId = 1;
 
-        private class ExtendedStdStatementLevelInfo : StdStatementLevelInfo
+        internal class ExtendedStdStatementLevelInfo : StdStatementLevelInfo
         {
-            public ExtendedStdStatementLevelInfo(int sLId, Level lvl)
+            internal ExtendedStdStatementLevelInfo(int sLId, Level lvl)
             {
                 StatementLevelId = sLId;
                 Level = lvl;
             }
 
-            public ExtendedStdStatementLevelInfo(Level lvl) => Level = lvl;
+            internal ExtendedStdStatementLevelInfo(Level lvl) => Level = lvl;
         }
 
         [Test]
