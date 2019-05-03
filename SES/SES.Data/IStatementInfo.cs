@@ -32,10 +32,10 @@ namespace SES.Data
         /// <summary>
         /// Statement agents, or what caused the statement
         /// during the operation : agents are the cause when
-        /// statement is the consequence. Can be single or
-        /// multiple.
+        /// statement is the consequence. Can contain a single
+        /// agents or multiple ones.
         /// </summary>
-        IEnumerable<object> Agents { get; set; }
+        object Agents { get; set; }
 
         /// <summary>
         /// Statement result, or what has been successfully

@@ -30,7 +30,7 @@ namespace SES.Data
         /// <summary>
         /// See <see cref="IStatementInfo.Agents"/>.
         /// </summary>
-        public IEnumerable<object> Agents { get; set; }
+        public object Agents { get; set; }
 
         /// <summary>
         /// See <see cref="IStatementInfo.Result"/>.
