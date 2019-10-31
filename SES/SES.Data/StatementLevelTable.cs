@@ -1,6 +1,5 @@
-﻿using CK.Setup;
+﻿using CK.Core;
 using CK.SqlServer;
-using CK.SqlServer.Setup;
 using System.Threading.Tasks;
 
 namespace SES.Data

@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CK.DB.Auth" Version="$(CKDBVersion)" />
-    <PackageReference Include="HW.Subsuite.Essentials.Culture" Version="0.1.4" />
+    <PackageReference Include="CK.DB.Auth" Version="6.1.0" />
+    <PackageReference Include="HW.Subsuite.Essentials.Culture" Version="0.1.5" />
   </ItemGroup>
   
 </Project>
